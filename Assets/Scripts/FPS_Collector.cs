@@ -8,6 +8,8 @@ public class FPS_Collector : MonoBehaviour
     private int count;
     public Text countText;
     public Text winText;
+    public AudioClip dingSound;
+    private AudioSource AudioSource;
 
     
     // Start is called before the first frame update
@@ -16,6 +18,7 @@ public class FPS_Collector : MonoBehaviour
         count = 0;
         SetCountText();
         winText.text = "";
+        AudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,8 @@ public class FPS_Collector : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
+            AudioSource.clip = dingSound;
+            AudioSource.Play();
             other.gameObject.SetActive(false);
             count = count + 1;
             SetCountText();
